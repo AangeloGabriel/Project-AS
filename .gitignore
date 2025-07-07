@@ -7,3 +7,4 @@ logicaTestes.py
 .venv/
 venv
 env
+.env

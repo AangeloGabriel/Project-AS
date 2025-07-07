@@ -6,8 +6,8 @@ from watchdog.events import FileSystemEventHandler
 import shutil
 import os 
 
-path_init = Path(r"C:\Users\angelo.alencar\Desktop\TESTES E TESTES\AS_Consolida")
-path_oficial = Path(r"C:\Users\angelo.alencar\Desktop\TESTES E TESTES\Base_As\Base de AS 2.0.xlsx")
+path_init = Path()
+path_oficial = Path()
 arquivos_processados = set()
 
 
