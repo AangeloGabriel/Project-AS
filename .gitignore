@@ -1,13 +1,9 @@
+AS_Consolida
+Base_AS
+HistoricoAs
+MonitoraPasta
+teste.xlsx
+logicaTestes.py
 .venv/
-venv/
-env/
-
-project.spec
-SLA
-ORIGINAIS
-dist
-build
-junho am.xml
-junho sp.xml
-Sintético consolidado.xlsx
-App_Comissao.spec
+venv
+env
