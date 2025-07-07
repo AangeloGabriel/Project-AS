@@ -22,8 +22,8 @@ arquivos_processados = set()
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
         nome_evento = Path(event.src_path).name
-        if nome_evento.startswiths("~$"):
-            return  
+        if nome_evento.startswith("~$"):
+            return
 
         time.sleep(0.5) 
 
