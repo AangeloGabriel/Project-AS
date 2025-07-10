@@ -52,6 +52,7 @@ class MyHandler(FileSystemEventHandler):
             a = tratamento(Brasil, IQ)
             arquivo = path_salva_cru / "As_Cru.xlsx" 
             a.save(arquivo)
+            print(type(a))
 
             shutil.move(Brasil, path_historico / Brasil.name)
             shutil.move(IQ, path_historico / IQ.name)

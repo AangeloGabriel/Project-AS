@@ -9,13 +9,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
-
 path_init = Path(os.getenv('caminho_cru'))
 path_oficial = Path(os.getenv('caminho_consolidado'))
+path_arquivo_oficial = path_oficial / 'Base de AS 2.0.xlsx'
 arquivos_processados = set()
 
-print(path_init)
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
         ASCru = None
@@ -29,8 +27,10 @@ class MyHandler(FileSystemEventHandler):
         time.sleep(2.5)
 
         try:
-            a = incrementa(ASCru, path_oficial)
-            a.save(r"C:\Users\angelo.alencar\Desktop\TESTES E TESTES\Base_As\Base de AS 3.0.xlsx")
+            print(ASCru)
+            a = incrementa(ASCru, path_arquivo_oficial)
+            arquivo = (path_oficial / "Base de As 3.0.xlsx")
+            a.save(arquivo)
 
             os.remove(ASCru)
         except Exception as e:
