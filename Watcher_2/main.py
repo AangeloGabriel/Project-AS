@@ -5,11 +5,14 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import shutil
 import os 
+from dotenv import load_dotenv
 
-path_init = Path(r"C:\Users\angelo.alencar\Desktop\TESTES E TESTES\AS_Consolida")
-path_oficial = Path(r"C:\Users\angelo.alencar\Desktop\TESTES E TESTES\Base_As\Base de AS 2.0.xlsx")
+load_dotenv()
+
+path_init = Path(os.getenv('caminho_cru'))
+path_oficial = Path(os.getenv('caminho_consolidado'))
+path_arquivo_oficial = path_oficial / 'Base de AS 2.0.xlsx'
 arquivos_processados = set()
-
 
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
@@ -19,13 +22,15 @@ class MyHandler(FileSystemEventHandler):
             if name.startswith("~$") or not name.endswith(".xlsx"):
                 continue
 
-            if name == "AS_Cru.xlsx":
+            if name == "As_Cru.xlsx":
                 ASCru = i
         time.sleep(2.5)
 
         try:
-            a = incrementa(ASCru, path_oficial)
-            a.save(r"C:\Users\angelo.alencar\Desktop\TESTES E TESTES\Base_As\Base de AS 3.0.xlsx")
+            print(ASCru)
+            a = incrementa(ASCru, path_arquivo_oficial)
+            arquivo = (path_oficial / "Base de As 3.0.xlsx")
+            a.save(arquivo)
 
             os.remove(ASCru)
         except Exception as e:

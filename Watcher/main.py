@@ -4,13 +4,18 @@ from pathlib import Path
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import shutil
+from dotenv import load_dotenv
+import os
 
 ValidaBrasil = "AS Brasil Week"
 ValidaIQMa = "- IQ Orders"
 ValidaIQMi = "- IQ orders"
 
-path_init = Path(r"C:\Users\angelo.alencar\Desktop\TESTES E TESTES\MonitoraPasta")
-path_historico = Path(r"C:\Users\angelo.alencar\Desktop\TESTES E TESTES\HistoricoAs")
+load_dotenv()
+
+path_init = Path(os.getenv("caminho_monitora"))
+path_historico = Path(os.getenv("caminho_historico"))
+path_salva_cru = Path(os.getenv("caminho_cru"))
 
 arquivos_processados = set()
 
@@ -18,7 +23,7 @@ class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
         nome_evento = Path(event.src_path).name
         if nome_evento.startswith("~$"):
-            return  
+            return
 
         time.sleep(0.5) 
 
@@ -45,7 +50,9 @@ class MyHandler(FileSystemEventHandler):
 
         try:
             a = tratamento(Brasil, IQ)
-            a.save(r"C:\Users\angelo.alencar\Desktop\TESTES E TESTES\AS_Consolida\AS_Cru.xlsx")
+            arquivo = path_salva_cru / "As_Cru.xlsx" 
+            a.save(arquivo)
+            print(type(a))
 
             shutil.move(Brasil, path_historico / Brasil.name)
             shutil.move(IQ, path_historico / IQ.name)

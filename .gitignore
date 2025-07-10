@@ -7,3 +7,5 @@ logicaTestes.py
 .venv/
 venv
 env
+.env
+As_Cru.xlsx
