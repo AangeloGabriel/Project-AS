@@ -5,12 +5,17 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import shutil
 import os 
+from dotenv import load_dotenv
 
-path_init = Path()
-path_oficial = Path()
+load_dotenv()
+
+
+
+path_init = Path(os.getenv('caminho_cru'))
+path_oficial = Path(os.getenv('caminho_consolidado'))
 arquivos_processados = set()
 
-
+print(path_init)
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
         ASCru = None
@@ -19,7 +24,7 @@ class MyHandler(FileSystemEventHandler):
             if name.startswith("~$") or not name.endswith(".xlsx"):
                 continue
 
-            if name == "AS_Cru.xlsx":
+            if name == "As_Cru.xlsx":
                 ASCru = i
         time.sleep(2.5)
 
